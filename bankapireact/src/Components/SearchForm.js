@@ -1,10 +1,42 @@
-const SearchForm = () => {
-  
-  return (
-    <form>
-      <label for="dateInput">Put your date</label>
-      <input name="dateInput" type="date" placeholder="RRRR-MM-DD" />
+import { useState } from "react";
+import React from "react";
 
+const SearchForm = (props) => {
+  const [selectedValue, setData] = useState({
+    dateInput: "",
+    currInput: "",
+  });
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+
+    setData((selectedValue) => ({
+      ...selectedValue,
+      [name]: value,
+    }));
+
+    console.log(selectedValue);
+    const table = "a";
+
+    // let url1 = `http://api.nbp.pl/api/exchangerates/tables/${table}/${selectedValue.dateInput}/`;
+    let url2 = `http://api.nbp.pl/api/exchangerates/rates/${table}/${selectedValue.currInput}/${selectedValue.dateInput}/`;
+    fetch(url2)
+      .then((response) => {
+        if (response.ok) {
+          // console.log(response)
+          return response.json();
+        } else {
+          return Promise.reject(`Http error: ${response.status}`);
+        }
+      })
+      .then((currencies) => {
+        // console.log(currencies);
+        props.addDate(currencies);
+      });
+  };
+
+  return (
+    <form onChange={handleChange}>
       <label for="currInput">Put the Currency Code</label>
       <select name="currInput" id="currInput">
         <option value="THB">THB </option>
@@ -39,6 +71,9 @@ const SearchForm = () => {
         <option value="CNY">CNY</option>
         <option value="XDR">XDR</option>
       </select>
+      <br></br>
+      <label for="dateInput">Put your date</label>
+      <input name="dateInput" type="date" placeholder="RRRR-MM-DD" />
     </form>
   );
 };

@@ -3,8 +3,6 @@ import ListItem from "./ListItem";
 
 const Results = (props) => {
 
-  
-  
 
   return (
     <ul>

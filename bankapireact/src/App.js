@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useState } from "react";
+import React, {useState} from "react";
 import SearchForm from "./Components/SearchForm";
 import Results from "./Components/Results";
 
@@ -9,29 +9,31 @@ import Results from "./Components/Results";
 //   { currency: "dolar australijski", code: "AUD", mid: 3.0616 },
 // ];
 
+
+
 function App() {
+
   let [currencyData, setCurrencyData] = useState({
-    currency: "",
-    code: "",
-    mid: "",
-    date: "",
-  });
+    currency: '',
+    code: '',
+    mid: '',
+    date: ''
+  })
 
   const addDateHandler = (data) => {
-    console.log(data);
+    console.log(data)
     setCurrencyData({
       currency: data.currency,
       code: data.code,
       mid: data.rates[0].mid,
-      date: data.rates[0].effectiveDate,
-    });
+      date: data.rates[0].effectiveDate
 
-    console.log(currencyData);
-  };
+    })
+  }
 
   return (
     <div className="App">
-      <SearchForm addDate={addDateHandler} />
+      <SearchForm addDate = {addDateHandler} />
       <Results items={currencyData} />
     </div>
   );

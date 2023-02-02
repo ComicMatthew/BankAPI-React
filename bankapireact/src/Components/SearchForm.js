@@ -2,24 +2,32 @@ import { useState } from "react";
 import React from "react";
 
 const SearchForm = (props) => {
+
   const [selectedValue, setData] = useState({
     dateInput: "",
-    currInput: "",
+    currInput: "Choose your currency",
   });
 
   const handleChange = (event) => {
+    event.preventDefault()
     const { name, value } = event.target;
 
     setData((selectedValue) => ({
       ...selectedValue,
       [name]: value,
     }));
+  }
 
-    console.log(selectedValue);
+  const submitChange = (event) => {
+    event.preventDefault()
+    
+    if (selectedValue.dateInput !== '' && selectedValue.currInput !== "Choose your currency"){
+    
     const table = "a";
 
     // let url1 = `http://api.nbp.pl/api/exchangerates/tables/${table}/${selectedValue.dateInput}/`;
     let url2 = `http://api.nbp.pl/api/exchangerates/rates/${table}/${selectedValue.currInput}/${selectedValue.dateInput}/`;
+    
     fetch(url2)
       .then((response) => {
         if (response.ok) {
@@ -30,15 +38,16 @@ const SearchForm = (props) => {
         }
       })
       .then((currencies) => {
-        // console.log(currencies);
+        console.log(currencies);
         props.addDate(currencies);
       });
-  };
+  };}
 
   return (
-    <form onChange={handleChange}>
+    <form onSubmit={submitChange}>
       <label for="currInput">Put the Currency Code</label>
-      <select name="currInput" id="currInput">
+      <select name="currInput" id="currInput"  onChange={handleChange}>
+        <option value="Choose your currency">Choose your currency </option>
         <option value="THB">THB </option>
         <option value="EUR">EUR</option>
         <option value="USD">USD</option>
@@ -73,7 +82,8 @@ const SearchForm = (props) => {
       </select>
       <br></br>
       <label for="dateInput">Put your date</label>
-      <input name="dateInput" type="date" placeholder="RRRR-MM-DD" />
+      <input name="dateInput" type="date" placeholder="RRRR-MM-DD" onChange={handleChange}/>
+      <button type="submit" >Submit</button>
     </form>
   );
 };

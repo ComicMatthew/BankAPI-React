@@ -1,10 +1,10 @@
 import ListItem from "./ListItem";
-import React from "react";
+// import React, {useState} from "react";
 
 const Results = (props) => {
 
   
-
+  
 
   return (
     <ul>

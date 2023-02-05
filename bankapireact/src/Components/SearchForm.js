@@ -45,50 +45,24 @@ const SearchForm = (props) => {
     }
   };
 
-  const currencyList = [
-    "THB",
-    "EUR",
-    "USD",
-    "AUD",
-    "HKD",
-    "CAD",
-    "NZD",
-    "SGD",
-    "HUF",
-    "CHF",
-    "GBP",
-    "JPY",
-    "DKK",
-    "CZK",
-    "ISK",
-    "NOK",
-    "SEK",
-    "RON",
-    "TRY",
-    "BGN",
-    "ILS",
-    "CLP",
-    "PHP",
-    "MXN",
-    "ZAR",
-    "BRL",
-    "MYR",
-    "IDR",
-    "KRW",
-    "CNY",
-    "XDR",
+  const currencyList = [ "THB", "EUR", "USD", "AUD", "HKD", "CAD", "NZD",
+    "SGD", "HUF", "CHF", "GBP", "JPY", "DKK", "CZK", "ISK", "NOK", "SEK", "RON", "TRY",
+    "BGN", "ILS", "CLP", "PHP", "MXN", "ZAR", "BRL", "MYR", "IDR", "KRW", "CNY", "XDR",
   ];
 
   return (
     <form onSubmit={submitChange}>
       <label for="currInput">Put the Currency Code</label>
+
       <select name="currInput" id="currInput" onChange={handleChange}>
         <option value="Choose your currency">Choose your currency </option>
         {currencyList.map((element) => {
           return <option value={element}>{element}</option>;
         })}
       </select>
+
       <br></br>
+      
       <label for="dateInput">Put your date</label>
       <input
         name="dateInput"

@@ -1,21 +1,39 @@
 import ListItem from "./ListItem";
-// import React, {useState} from "react";
+import React from "react";
 
 const Results = (props) => {
+  const filteredList = props.items.filter((item) => {
+    return item.code === props.code;
+  });
 
+  if (props.code === "Choose your currency") {
+    return (
+      <div>
+        <p>{props.date}</p>
+        {props.items.map((item) => (
+          <ListItem
+            key={item.code}
+            currency={item.currency}
+            code={item.code}
+            mid={item.mid}
+          />
+        ))}
+      </div>
+    );
+  }
 
   return (
-    <ul>
-      {/* {props.items.map((item) => ( */}
+    <div>
+      <p>{props.date}</p>
+      {filteredList.map((item) => (
         <ListItem
-          key={props.items.code}
-          currency={props.items.currency}
-          code={props.items.code}
-          mid={props.items.mid}
-          date={props.items.date}
+          key={item.code}
+          currency={item.currency}
+          code={item.code}
+          mid={item.mid}
         />
-      {/* ))} */}
-    </ul>
+      ))}
+    </div>
   );
 };
 

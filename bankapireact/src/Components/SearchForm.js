@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import React from "react";
 
 const SearchForm = (props) => {
@@ -15,36 +15,15 @@ const SearchForm = (props) => {
       ...selectedValue,
       [name]: value,
     }));
+    
   };
 
-  const submitChange = (event) => {
-    event.preventDefault();
+  
 
-    if (
-      selectedValue.dateInput !== "" //&&
-      //selectedValue.currInput !== "Choose your currency"
-    ) {
-      const table = "a";
-
-      const url1 = `http://api.nbp.pl/api/exchangerates/tables/${table}/${selectedValue.dateInput}/`;
-      // const url2 = `http://api.nbp.pl/api/exchangerates/rates/${table}/${selectedValue.currInput}/${selectedValue.dateInput}/`;
-
-      fetch(url1)
-        .then((response) => {
-          if (response.ok) {
-            // console.log(response)
-            return response.json();
-          } else {
-            return Promise.reject(`Http error: ${response.status}`);
-          }
-        })
-        .then((currencies) => {
-          console.log(currencies);
-          props.addDate(currencies);
-          props.addCurrency(selectedValue.currInput);
-        });
-    }
-  };
+  useEffect(()=> {
+    props.addData(selectedValue)
+    // eslint-disable-next-line
+  }, [selectedValue])
 
   const currencyList = [
     "THB",
@@ -81,7 +60,7 @@ const SearchForm = (props) => {
   ];
 
   return (
-    <form onSubmit={submitChange}>
+    <form >
       <label for="currInput">Put the Currency Code</label>
       <select name="currInput" id="currInput" onChange={handleChange}>
         <option value="Choose your currency">Choose your currency </option>
@@ -100,7 +79,6 @@ const SearchForm = (props) => {
         placeholder="RRRR-MM-DD"
         onChange={handleChange}
       />
-      <button type="submit">Submit</button>
     </form>
   );
 };

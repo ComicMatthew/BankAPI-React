@@ -1,43 +1,69 @@
 import "./App.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SearchForm from "./Components/SearchForm";
 import Results from "./Components/Results";
 
-// const DUMMY_ARRAY = [
-//   { currency: "bat (Tajlandia)", code: "THB", mid: 0.1322 },
-//   { currency: "dolar amerykański", code: "USD", mid: 4.3258 },
-//   { currency: "dolar australijski", code: "AUD", mid: 3.0616 },
-// ];
 
 function App() {
   const [currencyData, setCurrencyData] = useState({
-    currencyList: [],
+    currencyCode: "",
     date: "",
   });
 
-  const [currencyCode, setCurrencyCode] = useState("");
+  const [responseData, setResponseData] = useState({
+    currenciesList: [],
+    recievedDate: ""
+  })
 
-  const addCurrencyHandler = (currencyCode) => {
-    console.log(currencyCode);
-    setCurrencyCode(currencyCode);
-  };
-
-  const addDateHandler = (data) => {
-    console.log(data);
+  const addDataHandler = (data) => {
+    // console.log(data);
     setCurrencyData({
-      currencyList: data[0].rates,
-      date: data[0].effectiveDate,
-    });
+      ...currencyData,
+      currencyCode: data.currInput,
+      date: data.dateInput,
+    })
+    
   };
+
+  
+  useEffect(() => {
+    const table = "a";
+
+    const url1 = `http://api.nbp.pl/api/exchangerates/tables/${table}/${currencyData.date}/`;
+    // const url2 = `http://api.nbp.pl/api/exchangerates/rates/${table}/${selectedValue.currInput}/${selectedValue.dateInput}/`;
+
+    fetch(url1)
+      .then((response) => {
+        if (response.ok) {
+          // console.log(response)
+          return response.json();
+        } else {
+          return Promise.reject(`Http error: ${response.status}`);
+        }
+      })
+      .then((currencies) => {
+        // console.log(currencies);
+        setResponseData({
+          
+          currenciesList: currencies[0].rates,
+          recievedDate: currencies[0].effectiveDate
+        })
+        
+      } );
+  }, [currencyData.date]);
+
+
 
   return (
     <div className="App">
-      <SearchForm addDate={addDateHandler} addCurrency={addCurrencyHandler} />
+      
+      <SearchForm addData={addDataHandler} />
       <Results
-        items={currencyData.currencyList}
-        date={currencyData.date}
-        code={currencyCode}
+        items={responseData.currenciesList}
+        date={responseData.recievedDate}
+        code={currencyData.currencyCode}
       />
+      
     </div>
   );
 }

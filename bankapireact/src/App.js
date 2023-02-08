@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import SearchForm from "./Components/SearchForm";
 import Results from "./Components/Results";
 
-
 function App() {
   const [currencyData, setCurrencyData] = useState({
     currencyCode: "",
@@ -12,8 +11,8 @@ function App() {
 
   const [responseData, setResponseData] = useState({
     currenciesList: [],
-    recievedDate: ""
-  })
+    recievedDate: "",
+  });
 
   const addDataHandler = (data) => {
     // console.log(data);
@@ -21,11 +20,9 @@ function App() {
       ...currencyData,
       currencyCode: data.currInput,
       date: data.dateInput,
-    })
-    
+    });
   };
 
-  
   useEffect(() => {
     const table = "a";
 
@@ -44,26 +41,20 @@ function App() {
       .then((currencies) => {
         // console.log(currencies);
         setResponseData({
-          
           currenciesList: currencies[0].rates,
-          recievedDate: currencies[0].effectiveDate
-        })
-        
-      } );
+          recievedDate: currencies[0].effectiveDate,
+        });
+      });
   }, [currencyData.date]);
-
-
 
   return (
     <div className="App">
-      
       <SearchForm addData={addDataHandler} />
       <Results
         items={responseData.currenciesList}
         date={responseData.recievedDate}
         code={currencyData.currencyCode}
       />
-      
     </div>
   );
 }

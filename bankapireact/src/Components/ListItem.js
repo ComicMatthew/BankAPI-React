@@ -1,12 +1,16 @@
 import React from "react";
+import "../App.css";
 
-const ListItem = ({currency, code, mid, date}) => {
+const ListItem = ({ currency, code, mid, date }) => {
   return (
-    <div>
-      <h1>{currency}</h1>
-      <h2>{code}</h2>
-      <h3>{mid}</h3>
-      <h3>{date}</h3>
+    <div className="list-item">
+      <div className="code-container">
+        <h1>{code}</h1>
+        <h2>{mid}</h2>
+      </div>
+      <div className="name-container">
+        <h1>{currency}</h1>
+      </div>
     </div>
   );
 };

@@ -15,15 +15,12 @@ const SearchForm = (props) => {
       ...selectedValue,
       [name]: value,
     }));
-    
   };
 
-  
-
-  useEffect(()=> {
-    props.addData(selectedValue)
+  useEffect(() => {
+    props.addData(selectedValue);
     // eslint-disable-next-line
-  }, [selectedValue])
+  }, [selectedValue]);
 
   const currencyList = [
     "THB",
@@ -60,25 +57,29 @@ const SearchForm = (props) => {
   ];
 
   return (
-    <form >
-      <label for="currInput">Put the Currency Code</label>
-      <select name="currInput" id="currInput" onChange={handleChange}>
-        <option value="Choose your currency">Choose your currency </option>
-        {currencyList.map((element) => {
-          return (
-            <option key={element} value={element}>
-              {element}
-            </option>
-          );
-        })}
-      </select>
-      <label for="dateInput">Put your date</label>
-      <input
-        name="dateInput"
-        type="date"
-        placeholder="RRRR-MM-DD"
-        onChange={handleChange}
-      />
+    <form className="new-search">
+      <div className="new-search_control">
+        <label for="currInput">Put the Currency Code</label>
+        <select name="currInput" id="currInput" onChange={handleChange}>
+          <option value="Choose your currency">Choose your currency </option>
+          {currencyList.map((element) => {
+            return (
+              <option key={element} value={element}>
+                {element}
+              </option>
+            );
+          })}
+        </select>
+      </div>
+      <div className="new-search_control">
+        <label for="dateInput">Put your date</label>
+        <input
+          name="dateInput"
+          type="date"
+          placeholder="RRRR-MM-DD"
+          onChange={handleChange}
+        />
+      </div>
     </form>
   );
 };

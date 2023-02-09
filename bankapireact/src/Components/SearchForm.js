@@ -59,9 +59,9 @@ const SearchForm = (props) => {
   return (
     <form className="new-search">
       <div className="new-search_control">
-        <label for="currInput">Put the Currency Code</label>
+        <label for="currInput">Wybierz walute</label>
         <select name="currInput" id="currInput" onChange={handleChange}>
-          <option value="Choose your currency">Choose your currency </option>
+          <option value="Choose your currency">Wszystkie waluty </option>
           {currencyList.map((element) => {
             return (
               <option key={element} value={element}>
@@ -72,7 +72,7 @@ const SearchForm = (props) => {
         </select>
       </div>
       <div className="new-search_control">
-        <label for="dateInput">Put your date</label>
+        <label for="dateInput">Wybierz date</label>
         <input
           name="dateInput"
           type="date"

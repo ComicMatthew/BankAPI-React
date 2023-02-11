@@ -4,7 +4,20 @@ import React from "react";
 import "../App.css";
 
 const Results = (props) => {
-  
+  const comparisonArray = props.items.map(
+    (item, index) => item.mid - props.yesterdayItems[index].mid
+  );
+
+  // eslint-disable-next-line
+  const comparedOutput = comparisonArray.map((item) => {
+    if (item > 0) {
+      return "Kurs wzrosl od wczoraj";
+    } else if (item === 0) {
+      return "Kurs jest taki sam od wczoraj";
+    } else if (item < 0) {
+      return "Kurs zmalal od wczoraj";
+    }
+  });
 
   const filteredList = props.items.filter((item) => {
     return item.code === props.code;
@@ -14,12 +27,13 @@ const Results = (props) => {
     return (
       <div className="result-list">
         <h1>Dane pochadza z dnia: {props.date}</h1>
-        {props.items.map((item) => (
+        {props.items.map((item, index) => (
           <ListItem
             key={item.code}
             currency={item.currency}
             code={item.code}
             mid={item.mid}
+            comparison={comparedOutput[index]}
           />
         ))}
       </div>
@@ -38,13 +52,12 @@ const Results = (props) => {
         />
       ))}
       {filteredList.map((item) => (
-        <CurrencyChange 
+        <CurrencyChange
           mid={item.mid}
           code={item.code}
           currency={item.currency}
         />
       ))}
-      
     </div>
   );
 };

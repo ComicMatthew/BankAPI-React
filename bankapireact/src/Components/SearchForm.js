@@ -1,26 +1,41 @@
 import { useEffect, useState } from "react";
 import React from "react";
+import getYesterday from "../functions/getYesterday";
 
 const SearchForm = (props) => {
   const [selectedValue, setData] = useState({
     dateInput: "",
-    currInput: "Choose your currency",
+    yesterdayDateInput: "",
   });
 
-  const handleChange = (event) => {
-    event.preventDefault();
-    const { name, value } = event.target;
+  const [currencyInput, setCurrencyInput] = useState("Choose your currency");
 
+  const handleDate = (event) => {
     setData((selectedValue) => ({
       ...selectedValue,
-      [name]: value,
+      dateInput: event.target.value,
+      yesterdayDateInput: getYesterday(event.target.value),
     }));
   };
 
+  const handleCurency = (event) => {
+    setCurrencyInput(event.target.value);
+  };
+  // const handleChange = (event) => {
+  //   event.preventDefault();
+  //   const { name, value } = event.target;
+
+  //   setData((selectedValue) => ({
+  //     ...selectedValue,
+  //     [name]: value,
+
+  //   }));
+
+  // };
+
   useEffect(() => {
-    props.addData(selectedValue);
-    // eslint-disable-next-line
-  }, [selectedValue]);
+    props.addData(selectedValue, currencyInput); // eslint-disable-next-line
+  }, [selectedValue, currencyInput]);
 
   const currencyList = [
     "THB",
@@ -60,7 +75,7 @@ const SearchForm = (props) => {
     <form className="new-search">
       <div className="new-search_control">
         <label for="currInput">Wybierz walute</label>
-        <select name="currInput" id="currInput" onChange={handleChange}>
+        <select name="currInput" id="currInput" onChange={handleCurency}>
           <option value="Choose your currency">Wszystkie waluty </option>
           {currencyList.map((element) => {
             return (
@@ -77,7 +92,7 @@ const SearchForm = (props) => {
           name="dateInput"
           type="date"
           placeholder="RRRR-MM-DD"
-          onChange={handleChange}
+          onChange={handleDate}
         />
       </div>
     </form>

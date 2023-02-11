@@ -13,7 +13,7 @@ const CurrencyChange = (props) => {
     <div className="list-item-specific">
       <div className="name-container">
         <div className="new-search_control">
-          <label for="Currency">Ile {props.currency} do wymiany:</label>
+          <label for="Currency">Ile waluty chcesz wymienic? - {props.currency}:</label>
           <input
             name="Currency"
             type="number"

@@ -3,12 +3,13 @@ import "../App.css";
 
 const ListItem = ({ currency, code, mid, comparison }) => {
 
+  const imageSource = require(`../Pictures/${comparison.picture}`);
 
   return (
     <div className="list-item">
       <div className="name-container">
         <h1>{currency}</h1>
-        <h2>{comparison}</h2>
+        <img src={imageSource} alt={comparison.name}></img>
       </div>
       <div className="code-container">
         <h1>{code}</h1>

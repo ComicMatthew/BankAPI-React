@@ -134,6 +134,10 @@
   width: 40%;
 }
 
+.name-container h2 {
+  color: red;
+}
+
 .code-container {
   display: flex;
   flex-direction: column;

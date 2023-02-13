@@ -4,6 +4,9 @@ import React from "react";
 import "../App.css";
 
 const Results = (props) => {
+
+// comparison list
+
   const comparisonArray = props.items.map(
     (item, index) => item.mid - props.yesterdayItems[index].mid
   );
@@ -11,17 +14,56 @@ const Results = (props) => {
   // eslint-disable-next-line
   const comparedOutput = comparisonArray.map((item) => {
     if (item > 0) {
-      return "Kurs wzrosl od wczoraj";
+      return {
+        name: "Wartosc wzrosla",
+        picture: "Up-arrow.png",
+      };
     } else if (item === 0) {
-      return "Kurs jest taki sam od wczoraj";
+      return {
+        name: "wartosc spadla",
+        picture: "Right-arrow.png",
+      };
     } else if (item < 0) {
-      return "Kurs zmalal od wczoraj";
+      return {
+        name: "Wartosc spadla",
+        picture: "Down-arrow.png",
+      };
     }
   });
 
+
+  //Filtered lists - to long. Want a new concept
   const filteredList = props.items.filter((item) => {
     return item.code === props.code;
   });
+
+  const filteredListYesterday = props.yesterdayItems.filter((item) => {
+    return item.code === props.code
+  })
+
+  const comparisonFilteredList = filteredList.map((item, index) => item.mid - filteredListYesterday[index].mid)
+
+  // eslint-disable-next-line
+  const comparedFilteredOutput = comparisonFilteredList.map((item) => {
+    if (item > 0) {
+      return {
+        name: "Wartosc wzrosla",
+        picture: "Up-arrow.png",
+      };
+    } else if (item === 0) {
+      return {
+        name: "wartosc spadla",
+        picture: "Right-arrow.png",
+      };
+    } else if (item < 0) {
+      return {
+        name: "Wartosc spadla",
+        picture: "Down-arrow.png",
+      };
+    }
+  })
+
+ 
 
   if (props.code === "Choose your currency") {
     return (
@@ -43,12 +85,13 @@ const Results = (props) => {
   return (
     <div className="result-list-short">
       <h1>Dane pochadza z dnia: {props.date}</h1>
-      {filteredList.map((item) => (
+      {filteredList.map((item, index) => (
         <ListItem
           key={item.code}
           currency={item.currency}
           code={item.code}
           mid={item.mid}
+          comparison={comparedFilteredOutput[index]}
         />
       ))}
       {filteredList.map((item) => (

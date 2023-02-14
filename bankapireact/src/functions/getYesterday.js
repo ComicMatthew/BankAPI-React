@@ -5,9 +5,6 @@
   // };
 
 
-
-
-
 function getYesterday(input) {
     const choosenDate = new Date(input);
     const yesterdayDate = new Date(choosenDate);

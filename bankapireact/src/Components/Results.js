@@ -2,6 +2,7 @@ import ListItem from "./ListItem";
 import CurrencyChange from "./CurrencyChange";
 import React from "react";
 import "../App.css";
+import checkDiferenceInArray from "../functions/checkDiferenceInArray"
 
 const Results = (props) => {
 
@@ -12,25 +13,8 @@ const Results = (props) => {
   );
 
   // eslint-disable-next-line
-  const comparedOutput = comparisonArray.map((item) => {
-    if (item > 0) {
-      return {
-        name: "Wartosc wzrosla",
-        picture: "Up-arrow.png",
-      };
-    } else if (item === 0) {
-      return {
-        name: "wartosc spadla",
-        picture: "Right-arrow.png",
-      };
-    } else if (item < 0) {
-      return {
-        name: "Wartosc spadla",
-        picture: "Down-arrow.png",
-      };
-    }
-  });
-
+  const comparedOutput = checkDiferenceInArray(comparisonArray)
+  
 
   //Filtered lists - to long. Want a new concept
   const filteredList = props.items.filter((item) => {
@@ -43,27 +27,9 @@ const Results = (props) => {
 
   const comparisonFilteredList = filteredList.map((item, index) => item.mid - filteredListYesterday[index].mid)
 
-  // eslint-disable-next-line
-  const comparedFilteredOutput = comparisonFilteredList.map((item) => {
-    if (item > 0) {
-      return {
-        name: "Wartosc wzrosla",
-        picture: "Up-arrow.png",
-      };
-    } else if (item === 0) {
-      return {
-        name: "wartosc spadla",
-        picture: "Right-arrow.png",
-      };
-    } else if (item < 0) {
-      return {
-        name: "Wartosc spadla",
-        picture: "Down-arrow.png",
-      };
-    }
-  })
+  
+  const comparedFilteredOutput = checkDiferenceInArray(comparisonFilteredList)
 
- 
 
   if (props.code === "Choose your currency") {
     return (

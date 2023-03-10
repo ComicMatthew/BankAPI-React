@@ -49,10 +49,24 @@ function App() {
         setResponseData({
           currenciesList: currencies[1].rates,
           recievedDate: currencies[1].effectiveDate,
-          currenciesListYesterday: currencies[0].rates
+          currenciesListYesterday: currencies[0].rates,
         });
       });
   }, [currencyData.date, currencyData.yesterday]);
+
+  const addFilterCode = (element) => {
+    if (currencyData.currencyCode === element) {
+      setCurrencyData({
+        ...currencyData,
+        currencyCode: "Choose your currency",
+      });
+    } else {
+      setCurrencyData({
+        ...currencyData,
+        currencyCode: element,
+      });
+    }
+  };
 
   return (
     <div className="App">
@@ -62,6 +76,7 @@ function App() {
         yesterdayItems={responseData.currenciesListYesterday}
         date={responseData.recievedDate}
         code={currencyData.currencyCode}
+        addFilterCodee={addFilterCode}
       />
     </div>
   );

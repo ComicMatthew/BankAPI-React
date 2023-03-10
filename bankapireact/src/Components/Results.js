@@ -30,6 +30,10 @@ const Results = (props) => {
   
   const comparedFilteredOutput = checkDiferenceInArray(comparisonFilteredList)
 
+  const filterHandler = (element) => {
+    props.addFilterCodee(element);
+  }
+
 
   if (props.code === "Choose your currency") {
     return (
@@ -42,6 +46,7 @@ const Results = (props) => {
             code={item.code}
             mid={item.mid}
             comparison={comparedOutput[index]}
+            addFilter={filterHandler}
           />
         ))}
       </div>
@@ -58,6 +63,7 @@ const Results = (props) => {
           code={item.code}
           mid={item.mid}
           comparison={comparedFilteredOutput[index]}
+          addFilter={filterHandler}
         />
       ))}
       {filteredList.map((item) => (

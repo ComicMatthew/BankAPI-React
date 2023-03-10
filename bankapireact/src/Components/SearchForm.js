@@ -20,6 +20,7 @@ const SearchForm = (props) => {
 
   const handleCurency = (event) => {
     setCurrencyInput(event.target.value);
+    
   };
   // const handleChange = (event) => {
   //   event.preventDefault();

@@ -70,7 +70,8 @@ function App() {
 
   return (
     <div className="App">
-      <SearchForm addData={addDataHandler} />
+      <SearchForm addData={addDataHandler} 
+      code = {currencyData.currencyCode}/>
       <Results
         items={responseData.currenciesList}
         yesterdayItems={responseData.currenciesListYesterday}

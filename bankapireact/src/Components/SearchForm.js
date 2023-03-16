@@ -36,6 +36,7 @@ const SearchForm = (props) => {
 
   useEffect(() => {
     props.addData(selectedValue, currencyInput); // eslint-disable-next-line
+    
   }, [selectedValue, currencyInput]);
 
   const currencyList = [
@@ -76,7 +77,7 @@ const SearchForm = (props) => {
     <form className="new-search">
       <div className="new-search_control">
         <label for="currInput">Wybierz walute</label>
-        <select name="currInput" id="currInput" onChange={handleCurency}>
+        <select name="currInput" id="currInput" onChange={handleCurency} value = {props.code}>
           <option value="Choose your currency">Wszystkie waluty </option>
           {currencyList.map((element) => {
             return (

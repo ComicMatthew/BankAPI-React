@@ -35,8 +35,8 @@ const SearchForm = (props) => {
   // };
 
   useEffect(() => {
-    props.addData(selectedValue, currencyInput); // eslint-disable-next-line
-    
+    props.addData(selectedValue, currencyInput); 
+    // eslint-disable-next-line
   }, [selectedValue, currencyInput]);
 
   const currencyList = [

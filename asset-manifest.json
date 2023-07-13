@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/NBP-API-with-React/static/css/main.0c02c32d.css",
+    "main.js": "/NBP-API-with-React/static/js/main.15a054c6.js",
+    "index.html": "/NBP-API-with-React/index.html",
+    "main.0c02c32d.css.map": "/NBP-API-with-React/static/css/main.0c02c32d.css.map",
+    "main.15a054c6.js.map": "/NBP-API-with-React/static/js/main.15a054c6.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0c02c32d.css",
+    "static/js/main.15a054c6.js"
+  ]
+}

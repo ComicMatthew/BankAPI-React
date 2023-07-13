@@ -34,7 +34,7 @@ function App() {
     const table = "a";
 
     //const url1 = `http://api.nbp.pl/api/exchangerates/tables/${table}/${inputDate}/`;
-    const url2 = `http://api.nbp.pl/api/exchangerates/tables/${table}/${yesterdayToInputDate}/${inputDate}`;
+    const url2 = `https://api.nbp.pl/api/exchangerates/tables/${table}/${yesterdayToInputDate}/${inputDate}`;
 
     fetch(url2)
       .then((response) => {
@@ -70,8 +70,7 @@ function App() {
 
   return (
     <div className="App">
-      <SearchForm addData={addDataHandler} 
-      code = {currencyData.currencyCode}/>
+      <SearchForm addData={addDataHandler} code={currencyData.currencyCode} />
       <Results
         items={responseData.currenciesList}
         yesterdayItems={responseData.currenciesListYesterday}
